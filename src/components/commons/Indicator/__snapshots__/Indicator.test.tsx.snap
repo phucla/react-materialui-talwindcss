@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Indicator component should render correctly UI 1`] = `
+<div
+  className="indicator"
+>
+  <span
+    className="indicator__img"
+  />
+</div>
+`;

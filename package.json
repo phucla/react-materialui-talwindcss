@@ -3,23 +3,40 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.1.10",
-    "@types/jest": "^26.0.15",
+    "@types/jest": "^26.0.23",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "apisauce": "^2.1.1",
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "purgecss": "^4.0.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "redux": "^4.1.0",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.3",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "yarn run tailwind && react-scripts start",
+    "server": "json-server --watch db.json -p 3001",
+    "build": "yarn run tailwind && yarn run purge-tailwind && react-scripts build",
+    "tailwind": "tailwind build ./src/styles/tailwind-config.css -c ./tailwind.config.js -o ./src/styles/tailwind.css",
+    "purge-tailwind": "node ./purge-css.js",
+    "test": "jest --config=jest.config.js --passWithNoTests",
+    "test:coverage": "yarn test --coverage",
+    "prettier": "prettier --write {src}/**/*.{ts,sx}",
+    "eslint": "eslint {src,__tests__,.stories}/**/*.{ts,tsx}",
+    "lint-staged": "lint-staged",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,6 +55,44 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/redux-logger": "^3.0.8",
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "dotenv": "^10.0.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "imagemin-lint-staged": "^0.4.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.0",
+    "react-testing-library": "^8.0.1",
+    "redux-logger": "^3.0.6",
+    "ts-jest": "^27.0.2"
+  },
+  "lint-staged": {
+    "{src/**/*.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "{src,__tests__,stories}/**/*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{png,jpeg,jpg,gif,svg}": [
+      "imagemin-lint-staged",
+      "git add"
     ]
   }
 }

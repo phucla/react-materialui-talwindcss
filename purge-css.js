@@ -1,5 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const { PurgeCSS } = require('purgecss')
+const fs = require('fs')
+const path = require('path')
 
 const purge = async () => {
   const result = await new PurgeCSS().purge({
@@ -9,7 +11,11 @@ const purge = async () => {
     rejected: true,
     variables: true,
   })
-  console.log(result[0].rejected)
+
+  result.forEach((out) => {
+    console.log(out.rejected)
+    fs.writeFileSync(path.resolve(__dirname, out.file), out.css, 'utf-8')
+  })
 }
 
 purge()

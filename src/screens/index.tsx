@@ -1,32 +1,40 @@
 import React, { Suspense, lazy, useEffect } from 'react'
-import { Route, Switch, useHistory} from 'react-router-dom'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Outlet,
+  useNavigate,
+} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ROUTES from '../constants/routes'
 import Indicator from '../components/commons/Indicator'
-import {Auth} from '../types'
+import { Auth } from '../types'
+import DashboardLayout from 'components/layout/DashboardLayout'
 
 // helpers
 import API from '../services/apis'
 
 const LoginScreen = lazy(() => import('./Login'))
-const TodosScreen = lazy(() => import('./Todos'))
+const ProductScreen = lazy(() => import('./Products'))
 
 const Screens = () => {
   const authStore = useSelector((state: Auth) => state.auth)
-  const history = useHistory()
+  const navigate = useNavigate()
   const { auth_token } = authStore
 
   useEffect(() => {
     if (auth_token) {
       window.onpopstate = (e) => {
         e.preventDefault()
-        history.push(ROUTES.HOME)
+        navigate(ROUTES.HOME)
       }
     } else {
-      history.push(ROUTES.LOGIN)
+      navigate(ROUTES.LOGIN)
     }
 
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [auth_token])
 
   useEffect(() => {
@@ -38,12 +46,15 @@ const Screens = () => {
   }, [auth_token])
 
   return (
-      <Suspense fallback={<Indicator />}>
-        <Switch>
-          <Route exact path={ROUTES.HOME} component={TodosScreen} />
-          <Route path={ROUTES.LOGIN} component={LoginScreen} />
-        </Switch>
-      </Suspense>
+    <Suspense fallback={<Indicator />}>
+      <DashboardLayout>
+        <Routes>
+          <Route path="/login" element={<LoginScreen />} />
+
+          <Route path="/" element={<ProductScreen />} />
+        </Routes>
+      </DashboardLayout>
+    </Suspense>
   )
 }
 

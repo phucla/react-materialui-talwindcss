@@ -2,7 +2,7 @@
 import API from '../services/apis'
 import * as Actions from '../stores/actions'
 
-const authMiddleware = () => (next) => (action) => {
+const authMiddleware = () => (next: any) => (action:any) => {
   const { type } = action
   // add token to API header when user sign in success
   if (type === Actions.LOGIN_SUCCESS || type === Actions.SIGNUP_SUCCESS) {

@@ -6,7 +6,12 @@ export const initialState = {
   auth_token: '',
 }
 
-const authReducer = (state = initialState, action) => {
+type ActionType = {
+  errors: string,
+  type: string,
+  data: any
+}
+const authReducer = (state = initialState, action: ActionType) => {
   const { errors, type, data } = action
   const { token } = data || {}
 

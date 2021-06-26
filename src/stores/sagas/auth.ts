@@ -9,7 +9,9 @@ import * as Actions from '../actions'
 /**
  * Login request
  */
-function* loginRequest() {
+function* loginRequest(): Generator<
+  any, any, any
+> {
   try {
     const response = yield call(() => API.get(`/profile/1`))
 
@@ -32,7 +34,9 @@ function* loginRequest() {
   }
 }
 
-function* authSaga() {
+function* authSaga():Generator<
+  any, any, any
+> {
   return [yield takeLatest(Actions.LOGIN_REQUEST, loginRequest)]
 }
 

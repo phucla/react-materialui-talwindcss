@@ -1,14 +1,14 @@
 // Libs
 import { combineReducers } from 'redux'
 import authReducer from './auth'
-import todosReducer from './todos'
+import productsReducer from './products'
 
 const appReducers = combineReducers({
   auth: authReducer,
-  user: todosReducer,
+  product: productsReducer,
 })
 
-const rootReducers = (state, action) => {
+const rootReducers = (state: any, action: any) => {
   return appReducers(state, action)
 }
 

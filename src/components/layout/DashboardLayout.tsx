@@ -15,8 +15,8 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         onMobileClose={() => setMobileNavOpen(false)}
         openMobile={isMobileNavOpen}
       />
-      <div className="flex mx-auto pt-100">
-        <div className="flex-auto h-full overflow-auto">{children}</div>
+      <div className="pl-10 flex mx-auto pt-100">
+        <div className="pl-10 ml-10 flex-auto overflow-scroll pt-84">{children}</div>
       </div>
     </div>
   )

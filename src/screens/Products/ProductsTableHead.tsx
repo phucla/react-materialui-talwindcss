@@ -1,7 +1,6 @@
 import React from 'react'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
+import {TableCell, makeStyles, TableHead, TableRow} from '@material-ui/core'
+
 
 const rows = [
   {
@@ -55,9 +54,10 @@ const rows = [
 ]
 
 const ProductsTableHead = () => {
+  const classes = useStyles();
   return (
-    <TableHead>
-      <TableRow className="h-64 bg-green-100">
+    <TableHead className={classes.text}>
+      <TableRow className="h-64 bg-green-100 border ">
         {rows.map((row) => {
           return (
             <TableCell
@@ -75,4 +75,11 @@ const ProductsTableHead = () => {
   )
 }
 
+const useStyles = makeStyles(() => ({
+	text: {
+    "& .MuiTableCell-root": {
+      fontSize: "14px",
+    }
+	},
+}));
 export default ProductsTableHead

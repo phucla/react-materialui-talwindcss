@@ -31,7 +31,7 @@ const DashboardSidebar = ({ onMobileClose, openMobile }: Props) => {
   }, [openMobile, onMobileClose])
 
   return (
-    <Box className="w-200 pt-64 pl-20">
+    <Box className="w-200 pt-64 pl-20 bg-green-700">
       <List>
         {items.map((item) => (
           <NavItem

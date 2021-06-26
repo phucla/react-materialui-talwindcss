@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TablePagination from '@material-ui/core/TablePagination'
-import TableRow from '@material-ui/core/TableRow'
-import Typography from '@material-ui/core/Typography'
-// import clsx from 'clsx'
+import {TextField, Select,MenuItem,Table, makeStyles, Theme, Chip, TableBody, TableCell, TablePagination, TableRow, Typography} from '@material-ui/core'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import * as Actions from '../../stores/actions'
 import ProductsTableHead from './ProductsTableHead'
 import { ProductType } from '../../types'
@@ -16,6 +10,7 @@ import { ProductType } from '../../types'
 const ProductsTable = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const classes = useStyles();
   const { products } = useSelector((state: ProductType) => state.product)
 
   const [data, setData] = useState(products)
@@ -42,13 +37,29 @@ const ProductsTable = () => {
     console.log(value)
   }
 
-  console.log(products)
+  const handleChange = () => {
+
+  }
   return (
+    <div className={classes.root}>
     <div className="w-full flex flex-col">
-      <Table className="min-w-xl" aria-labelledby="tableTitle">
+      <div className="flex align-center py-20">
+      <TextField placeholder="Search by name" className="w-200 mr-20"/>
+      <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={10}
+          onChange={handleChange}
+        >
+          <MenuItem className={classes.text} value={10}>Ten</MenuItem>
+          <MenuItem className={classes.text} value={20}>Twenty</MenuItem>
+          <MenuItem className={classes.text} value={30}>Thirty</MenuItem>
+        </Select>
+      </div>
+      <Table  aria-labelledby="tableTitle">
         <ProductsTableHead />
 
-        <TableBody>
+        <TableBody >
           {data.map((n) => {
             return (
               <TableRow
@@ -59,64 +70,64 @@ const ProductsTable = () => {
                 key={n.id}
                 onClick={() => handleClick(n)}
               >
-                <TableCell component="th" scope="row">
-                  <Typography>Client: {n.request.client}</Typography>
-                  <Typography>{n.request.date}</Typography>
-                  <Typography>Client: {n.request.status}</Typography>
-                  <Typography>Decision: {n.request.decision}</Typography>
-                  <Typography>CS Decision: {n.request.csDescision}</Typography>
-                  <Typography>ID Similarity</Typography>
-                  <Typography>Selfie Similarity</Typography>
+                <TableCell component="th" scope="row"  className="p-20">
+                  <Typography className={classes.text}>Client: {n.request.client}</Typography>
+                  <Typography className={classes.text}>Client: {n.request.client}</Typography>
+                  <Typography className={classes.text}>{n.request.date}</Typography>
+                  <Typography className={classes.text}>Client: {n.request.status}</Typography>
+                  <Typography className={classes.text}>Decision: <Chip className={classes.chip} label={n.request.decision}/></Typography>
+                  <Typography className={classes.text}>CS Decision: <Chip color="secondary" className={classes.chip} label={n.request.csDescision}/></Typography>
+                  <Typography><Link className={classes.link} to="">ID Similarity</Link></Typography>
+                  
+                  <Link className={classes.link} to="">Selfie Similarity</Link>
+                  
                 </TableCell>
                 <TableCell
-                  className="w-52"
+                  className="w-200 p-20"
                   component="th"
                   scope="row"
-                  padding="none"
                 >
                   <img
                     className="w-full block rounded"
                     src={n.front.url}
                     alt={n.front.description}
                   />
-                  <Typography>{n.front.description}</Typography>
+                  <Typography className={classes.text}>{n.front.description}</Typography>
                 </TableCell>
 
                 <TableCell
-                  className="w-52"
+                  className="w-200 p-20"
                   component="th"
                   scope="row"
-                  padding="none"
                 >
                   <img
                     className="w-full block rounded"
                     src={n.back.url}
                     alt={n.back.description}
                   />
-                  <Typography>{n.back.description}</Typography>
+                  <Typography className={classes.text}>{n.back.description}</Typography>
                 </TableCell>
                 <TableCell
-                  className="w-52"
+                  className="w-200 p-20"
                   component="th"
                   scope="row"
-                  padding="none"
                 >
                   <img
-                    className="w-full block rounded"
+                    className="w-180 block rounded h-300"
                     src={n.selfie.url}
                     alt={n.selfie.url}
                   />
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  <Typography>Name: {n.ocr.name}</Typography>
-                  <Typography>DOB: {n.ocr.dob}</Typography>
-                  <Typography>Gender: {n.ocr.gender}</Typography>
-                  <Typography>Address: {n.ocr.address}</Typography>
-                  <Typography>Hometown: {n.ocr.hometown}</Typography>
-                  <Typography>Issue place: {n.ocr.place}</Typography>
+                <TableCell component="th" scope="row" className="w-400 p-20">
+                  <Typography className={classes.text}>Name: {n.ocr.name}</Typography>
+                  <Typography className={classes.text}>DOB: {n.ocr.dob}</Typography>
+                  <Typography className={classes.text}>Gender: {n.ocr.gender}</Typography>
+                  <Typography className={classes.text}>Address: {n.ocr.address}</Typography>
+                  <Typography className={classes.text}>Hometown: {n.ocr.hometown}</Typography>
+                  <Typography className={classes.text}>Issue place: {n.ocr.place}</Typography>
                 </TableCell>
-                <TableCell component="th" scope="row">
-                  <Typography>Fimilarity: {n.faceMaching}</Typography>
+                <TableCell component="th" scope="row" className="w-200 p-20">
+                  <Typography className={classes.text}>Fimilarity: {n.faceMaching}</Typography>
                 </TableCell>
               </TableRow>
             )
@@ -139,8 +150,38 @@ const ProductsTable = () => {
         onChangePage={handleChangePage}
         onChangeRowsPerPage={handleChangeRowsPerPage}
       />
-    </div>
+    </div></div>
   )
 }
+
+const useStyles = makeStyles((theme: Theme) => ({
+	text: {
+		fontSize: "14px",
+    paddingTop: "5px"
+	},
+  link: {
+		fontSize: "14px",
+    paddingTop: "5px",
+    color: "rgba(18, 54, 249, 0.87)"
+	},
+  chip: {
+    height: "20px",
+    color: "rgba(0, 0, 0, 0.87)"
+  },
+  root: {
+    "& .MuiTableCell-root": {
+      border: "1px rgba(113, 104, 104, 0.87) solid"
+    },
+    "& .MuiFormControl-root": {
+      marginRight: "10px"
+    },
+    "& .MuiInputBase-input": {
+      fontSize: "14px",
+    },
+    "& .MuiInputBase-root": {
+      width: "100px"
+    }
+  }
+}));
 
 export default ProductsTable

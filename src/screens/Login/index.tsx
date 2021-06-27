@@ -116,7 +116,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: "14px",
     },
     "& .MuiInputBase-root": {
-      width: "200px"
+      width: "300px"
     }
   }
 }));

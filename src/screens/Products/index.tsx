@@ -74,7 +74,7 @@ const ProductsTable = () => {
           <MenuItem className={classes.text} value={20}>Twenty</MenuItem>
           <MenuItem className={classes.text} value={30}>Thirty</MenuItem>
         </Select>
-        <Button variant="contained" onClick={handleSearch}>Default</Button>
+        <Button className="x-26" variant="contained" onClick={handleSearch}>Search</Button>
       </div>
       <Table  aria-labelledby="tableTitle">
         <ProductsTableHead />
@@ -200,7 +200,8 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: "14px",
     },
     "& .MuiInputBase-root": {
-      width: "200px"
+      width: "200px",
+      marginRight: "10px"
     }
   }
 }));

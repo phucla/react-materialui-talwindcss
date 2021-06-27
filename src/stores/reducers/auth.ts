@@ -4,15 +4,22 @@ export const initialState = {
   type: '',
   isLoading: false,
   auth_token: '',
+  error: {
+    email: "",
+    password: ""
+  }
 }
 
 type ActionType = {
-  errors: string,
+  error: {
+    email: string,
+    password: string
+  },
   type: string,
   data: any
 }
 const authReducer = (state = initialState, action: ActionType) => {
-  const { errors, type, data } = action
+  const { error, type, data } = action
   const { token } = data || {}
 
   switch (type) {
@@ -36,7 +43,7 @@ const authReducer = (state = initialState, action: ActionType) => {
         ...state,
         type,
         isLoading: false,
-        error: errors,
+        error
       }
 
     case Actions.LOGOUT:

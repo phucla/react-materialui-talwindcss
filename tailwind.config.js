@@ -1,4 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
+const Colors = require('./src/themes/Colors') 
+
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   prefix: '',
@@ -15,6 +17,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       black: '#22292F',
+      text: Colors.text,
       white: '#FFF',
       grey: {
         50: '#FAFAFA',

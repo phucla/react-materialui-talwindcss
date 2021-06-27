@@ -38,3 +38,8 @@ export interface Product {
   }
   faceMaching: number
 }
+
+export interface SearchProduct {
+  name: string,
+  city: string
+}

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import {TextField, Select,MenuItem,Table, makeStyles, Theme, Chip, TableBody, TableCell, TablePagination, TableRow, Typography} from '@material-ui/core'
+import {Button, TextField, Select,MenuItem,Table, makeStyles, Theme, Chip, TableBody, TableCell, TablePagination, TableRow, Typography} from '@material-ui/core'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import * as Actions from '../../stores/actions'
 import ProductsTableHead from './ProductsTableHead'
 import { ProductType } from '../../types'
+import Colors from 'themes/Colors'
 
 const ProductsTable = () => {
   const dispatch = useDispatch()
@@ -16,7 +17,10 @@ const ProductsTable = () => {
   const [data, setData] = useState(products)
   const [page] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
-
+  const [filterData, setFilterData] = useState({
+    name: "",
+    city: "",
+  })
   useEffect(() => {
     dispatch(Actions.getProducts())
   }, [dispatch])
@@ -25,26 +29,41 @@ const ProductsTable = () => {
     setData(products)
   }, [products])
 
-  function handleClick(item: any) {
-    navigate(`/apps/e-commerce/products/${item.id}`)
+  const handleClick = (item: any) => {
+    navigate(`/apps/product/${item.id}`)
   }
 
-  function handleChangeRowsPerPage(event: any) {
+  const handleChangeRowsPerPage = (event: any) => {
     setRowsPerPage(event.target.value)
   }
 
-  function handleChangePage(event: any, value: any) {
+  const handleChangePage = (event: any, value: any) => {
     console.log(value)
   }
 
-  const handleChange = () => {
-
+  const handleChange = (e: any): void => {
+    setFilterData({
+      ...filterData,
+      city: e.target.value
+    })
   }
+
+  const handleChangeInput = (e: any): void => {
+    setFilterData({
+      ...filterData,
+      name: e.target.value
+    })
+  }
+
+  const handleSearch = () => {
+    dispatch(Actions.searchProducts(filterData))
+  }
+
   return (
     <div className={classes.root}>
     <div className="w-full flex flex-col">
       <div className="flex align-center py-20">
-      <TextField placeholder="Search by name" className="w-200 mr-20"/>
+      <TextField placeholder="Search by name" className="w-200 mr-20" onBlur={handleChangeInput} />
       <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -55,6 +74,7 @@ const ProductsTable = () => {
           <MenuItem className={classes.text} value={20}>Twenty</MenuItem>
           <MenuItem className={classes.text} value={30}>Thirty</MenuItem>
         </Select>
+        <Button variant="contained" onClick={handleSearch}>Default</Button>
       </div>
       <Table  aria-labelledby="tableTitle">
         <ProductsTableHead />
@@ -157,7 +177,8 @@ const ProductsTable = () => {
 const useStyles = makeStyles((theme: Theme) => ({
 	text: {
 		fontSize: "14px",
-    paddingTop: "5px"
+    paddingTop: "5px",
+    color: Colors.text
 	},
   link: {
 		fontSize: "14px",
@@ -179,7 +200,7 @@ const useStyles = makeStyles((theme: Theme) => ({
       fontSize: "14px",
     },
     "& .MuiInputBase-root": {
-      width: "100px"
+      width: "200px"
     }
   }
 }));

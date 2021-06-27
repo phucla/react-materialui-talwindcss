@@ -1,10 +1,7 @@
 import React, { Suspense, lazy, useEffect } from 'react'
 import {
-  BrowserRouter,
   Routes,
   Route,
-  Link,
-  Outlet,
   useNavigate,
 } from 'react-router-dom'
 import { useSelector } from 'react-redux'

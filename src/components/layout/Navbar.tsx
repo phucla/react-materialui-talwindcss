@@ -4,6 +4,8 @@ import { Link as RouterLink } from 'react-router-dom'
 import { AppBar, Badge, Box, IconButton, Toolbar } from '@material-ui/core'
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined'
 import InputIcon from '@material-ui/icons/Input'
+import * as Actions from 'stores/actions'
+import { useDispatch } from 'react-redux';
 
 type DashboardNavbarProps = {
   onMobileNavOpen: () => void
@@ -11,14 +13,20 @@ type DashboardNavbarProps = {
 
 const DashboardNavbar = ({ onMobileNavOpen }: DashboardNavbarProps) => {
   const [notifications] = useState([])
+	const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(Actions.userLogout())
+  }
 
   return (
     <AppBar elevation={0}>
-      <Toolbar>
+      <Toolbar className="justify-between">
         <RouterLink to="/">
           <h1>Logo</h1>
         </RouterLink>
         <Box />
+
+        <Box>
         <IconButton color="inherit">
           <Badge
             badgeContent={notifications.length}
@@ -28,9 +36,10 @@ const DashboardNavbar = ({ onMobileNavOpen }: DashboardNavbarProps) => {
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <IconButton color="inherit">
+        <IconButton color="inherit" onClick={handleLogout}>
           <InputIcon />
         </IconButton>
+        </Box>
       </Toolbar>
     </AppBar>
   )

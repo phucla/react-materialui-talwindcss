@@ -12,7 +12,7 @@ type DashboardLayoutProps = {
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false)
   const authStore = useSelector((state: Auth) => state.auth)
-  const { auth_token } = authStore
+  const { auth_token } = authStore || {}
 
   return (
     <div className="flex">

@@ -2,9 +2,10 @@
 import { put, call, takeLatest } from 'redux-saga/effects'
 
 import API from 'services/apis'
+import { push } from 'connected-react-router'
 
 // Constants
-import * as Actions from '../actions'
+import { authActions } from './authSlice';
 
 /**
  * Login request
@@ -16,28 +17,22 @@ function* loginRequest(): Generator<
     const response = yield call(() => API.get(`/profile/1`))
 
     if (response.ok) {
-      yield put({
-        type: Actions.LOGIN_SUCCESS,
-        data: response.data,
-      })
+      yield put(
+      authActions.loginSuccess(response.data)
+      )
+      yield put(push('/app/product'));
     } else {
-      yield put({
-        type: Actions.LOGIN_FAILED,
-        errors: response && response.data,
-      })
+      yield put(authActions.loginFailed(response.data))
     }
   } catch (errors) {
-    yield put({
-      type: Actions.LOGIN_FAILED,
-      errors,
-    })
+    yield put(authActions.loginFailed(errors))
   }
 }
 
 function* authSaga():Generator<
   any, any, any
 > {
-  return [yield takeLatest(Actions.LOGIN_REQUEST, loginRequest)]
+  return [yield takeLatest(authActions.loginRequest.type, loginRequest)]
 }
 
 export default authSaga

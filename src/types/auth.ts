@@ -9,7 +9,13 @@ export interface Auth {
   }
 }
 
-export interface LoginData {
-	email: string
-	password: string
+export interface LoginPayload {
+  username: string;
+  password: string;
+}
+
+export interface User {
+  id: number | string;
+  name: string;
+  auth_token: string;
 }

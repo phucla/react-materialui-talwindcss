@@ -5,28 +5,22 @@ import {
   useNavigate,
 } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import ROUTES from '../constants/routes'
-import Indicator from '../components/commons/Indicator'
-import { Auth } from '../types'
+import ROUTES from 'constants/routes'
+import Indicator from 'components/commons/Indicator'
 import DashboardLayout from 'components/layout/DashboardLayout'
-
+import { selectToken } from 'screens/auth/authSlice'
 // helpers
-import API from '../services/apis'
+import API from 'services/apis'
 
-const LoginScreen = lazy(() => import('./Login'))
-const ProductScreen = lazy(() => import('./Products'))
+const LoginScreen = lazy(() => import('./auth/pages/Login'))
+const ProductScreen = lazy(() => import('./product/pages/Product'))
 
 const Screens = () => {
-  const authStore = useSelector((state: Auth) => state.auth)
   const navigate = useNavigate()
-  const { auth_token } = authStore
-
+  const auth_token = useSelector(selectToken)
   useEffect(() => {
     if (auth_token) {
-      window.onpopstate = (e) => {
-        e.preventDefault()
-        navigate(ROUTES.HOME)
-      }
+        navigate('/app/product')
     } else {
       navigate(ROUTES.LOGIN)
     }
@@ -46,9 +40,12 @@ const Screens = () => {
     <Suspense fallback={<Indicator />}>
       <DashboardLayout>
         <Routes>
-          <Route path="/login" element={<LoginScreen />} />
-
-          <Route path="/" element={<ProductScreen />} />
+          <Route path="/login">
+            <LoginScreen />
+          </Route>
+          <Route path="/app/product">
+            <ProductScreen />
+          </Route>
         </Routes>
       </DashboardLayout>
     </Suspense>

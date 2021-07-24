@@ -9,8 +9,6 @@ import ROUTES from 'constants/routes'
 import Indicator from 'components/commons/Indicator'
 import DashboardLayout from 'components/layout/DashboardLayout'
 import { selectToken } from 'screens/auth/authSlice'
-// helpers
-import API from 'services/apis'
 
 const LoginScreen = lazy(() => import('./auth/pages/Login'))
 const ProductScreen = lazy(() => import('./product/pages/Product'))
@@ -23,14 +21,6 @@ const Screens = () => {
         navigate('/app/product')
     } else {
       navigate(ROUTES.LOGIN)
-    }
-
-    // eslint-disable-next-line
-  }, [auth_token])
-
-  useEffect(() => {
-    if (auth_token) {
-      API.setHeader('Authorization', `Token ${auth_token}`)
     }
 
     // eslint-disable-next-line

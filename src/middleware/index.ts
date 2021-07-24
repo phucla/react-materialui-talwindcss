@@ -1,5 +1,5 @@
 // helpers
-import API from 'services/apis'
+//import API from 'services/apis'
 import { authActions} from 'screens/auth/authSlice'
 
 const authMiddleware = () => (next: any) => (action:any) => {
@@ -7,10 +7,10 @@ const authMiddleware = () => (next: any) => (action:any) => {
   // add token to API header when user sign in success
   if (type === authActions.loginSuccess.type) {
     // set token on header api
-    API.setHeader('Authorization', `Token ${action.payload.auth_token}`)
+    localStorage.setItem('accessToken', action.payload.auth_token)
   } else if (type === authActions.logout.type) {
     // remove token on API header
-    delete API.headers.Authorization
+    localStorage.removeItem('accessToken')
   }
   next(action)
 }

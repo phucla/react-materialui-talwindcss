@@ -1,17 +1,24 @@
 // Libs
 import createSagaMiddleware from 'redux-saga'
 import { createStore, applyMiddleware, compose } from 'redux'
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 // Persist store
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 // Sagas
-import rootSaga from './sagas'
+import rootSaga from './rootSaga'
 
 // Reducers
-import rootReducers from './reducers'
-import authMiddleware from '../middleware'
+import authReducer from 'screens/auth/authSlice'
+import productReducer from 'screens/product/productSlice';
+import authMiddleware from 'middleware'
+
+const rootReducers = combineReducers({
+  auth: authReducer,
+  product: productReducer
+});
 
 const persistConfig = {
   key: 'root',
@@ -19,17 +26,17 @@ const persistConfig = {
   whitelist: ['auth'],
 }
 
-// declare global {
-//   interface Window {
-//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
-//   }
-// }
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+  }
+}
 
-// const composeEnhancers =
-//   (process.env.NODE_ENV !== 'production' &&
-//     typeof window === 'object' &&
-//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-//   compose
+const composeEnhancers =
+  (process.env.NODE_ENV !== 'production' &&
+    typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose
 
 // Saga Middleware
 const sagaMiddleware = createSagaMiddleware({})
@@ -38,7 +45,7 @@ const middlewares = [sagaMiddleware, authMiddleware]
 
 const store = createStore(
   persistReducer(persistConfig, rootReducers),
-  compose(applyMiddleware(...middlewares))
+  composeEnhancers(applyMiddleware(...middlewares))
 )
 
 const persistor = persistStore(store)

@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom'
 import { AppBar, Badge, Box, IconButton, Toolbar } from '@material-ui/core'
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined'
 import InputIcon from '@material-ui/icons/Input'
-import * as Actions from 'stores/actions'
+import { authActions } from 'screens/auth/authSlice'
 import { useDispatch } from 'react-redux';
 
 type DashboardNavbarProps = {
@@ -15,7 +15,7 @@ const DashboardNavbar = ({ onMobileNavOpen }: DashboardNavbarProps) => {
   const [notifications] = useState([])
 	const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(Actions.userLogout())
+    dispatch(authActions.logout())
   }
 
   return (

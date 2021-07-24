@@ -1,12 +1,12 @@
 // Libs
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, ShallowWrapper } from 'enzyme'
 
 // Components
 import Indicator from './index'
 
 describe('Indicator component', () => {
-  let wrapper
+  let wrapper: ShallowWrapper
 
   beforeEach(() => {
     wrapper = shallow(<Indicator />)

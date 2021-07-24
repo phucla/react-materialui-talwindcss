@@ -3,17 +3,17 @@ import {Button, TextField, Select,MenuItem,Table, makeStyles, Theme, Chip, Table
 
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
-import * as Actions from '../../stores/actions'
-import ProductsTableHead from './ProductsTableHead'
-import { ProductType } from '../../types'
+import ProductsTableHead from '../components/ProductsTableHead'
+import { Product } from 'types/product'
 import Colors from 'themes/Colors'
+import { selectProduct, productActions } from '../productSlice'
 
 const ProductsTable = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const classes = useStyles();
-  const { products } = useSelector((state: ProductType) => state.product)
-
+  const products = useSelector(selectProduct)
+  //const products = productData
   const [data, setData] = useState(products)
   const [page] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
@@ -22,7 +22,7 @@ const ProductsTable = () => {
     city: "",
   })
   useEffect(() => {
-    dispatch(Actions.getProducts())
+    dispatch(productActions.getProductsRequest())
   }, [dispatch])
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const ProductsTable = () => {
   }
 
   const handleSearch = () => {
-    dispatch(Actions.searchProducts(filterData))
+    dispatch(productActions.searchProducts(filterData))
   }
 
   return (
@@ -80,7 +80,7 @@ const ProductsTable = () => {
         <ProductsTableHead />
 
         <TableBody >
-          {data.map((n) => {
+          {data.map((n: Product) => {
             return (
               <TableRow
                 className="h-64 cursor-pointer"

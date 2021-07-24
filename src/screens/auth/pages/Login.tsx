@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Box,
-  TextField,
   Typography,
   Button,
   Input,
@@ -14,9 +13,9 @@ import PasswordIcon from '@material-ui/icons/Lock';
 
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import * as Actions from '../../stores/actions'
-import { Auth, LoginData } from '../../types'
-import ROUTES from '../../constants/routes'
+import { authActions } from '../authSlice';
+import { Auth } from 'types'
+import ROUTES from 'constants/routes'
 
 
 const  Login = ()  => {
@@ -29,7 +28,7 @@ const  Login = ()  => {
 	const [isFormValid, setIsFormValid] = useState(false);
 
 	useEffect(() => {
-		if (authStore.type === Actions.LOGIN_SUCCESS) {
+		if (authStore.type === authActions.loginSuccess.type) {
 		  navigate(ROUTES.HOME)
 		}
 	
@@ -53,10 +52,12 @@ const  Login = ()  => {
 		setPassword(e.target.value)
 	}
 	function handleSubmit() {
-		dispatch(Actions.loginRequest({
-      email,
-      password
-    }));
+		dispatch(
+      authActions.loginRequest({
+        username: email,
+        password
+      })
+     );
 	}
 
 	return (

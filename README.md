@@ -52,9 +52,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Quickly Start
 
-- Clone source from: ``
+- Clone source from: `git@github.com:phucla/react-materialui-talwindcss.git`
 
-- Install dependencies: `cd react-traning && yarn`
+- Install dependencies: `cd react-materialui-talwindcss && yarn`
 
 - Run server: `yarn server`
 

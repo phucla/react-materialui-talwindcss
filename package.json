@@ -1,22 +1,7 @@
 {
-  "name": "react-materialui-tailwindcss",
-  "author": {
-    "email": "laducphuc@gmail.com",
-    "name": "Phuc La",
-    "url": "https://github.com/phucla/react-materialui-talwindcss"
-  },
+  "name": "calendar",
   "version": "0.1.0",
   "private": true,
-  "keywords": [
-    "react",
-    "react skeleton",
-    "react structure",
-    "material ui",
-    "tailwind css",
-    "jest",
-    "typescript",
-    "structure"
-  ],
   "dependencies": {
     "@date-io/date-fns": "1.3.13",
     "@material-ui/core": "^4.11.4",

@@ -1,15 +1,6 @@
-# REACT TRAINING.
+# REACT - MATERIAL UI - TAILWIND CSS- TYPE SCRIPT.
 
-## Mục tiêu :
-
-- Thành thạo các bước khởi tạo một dự án React
-- Nắm được các bước triễn khai trên cho môi trường thực tế
-- Nắm được ý tưởng và nhiệm vụ của từng thành phần trong mã nguồn.
-- Nắm được cách triễn khai như thêm chức năng. Các kết nối giữa các thành phần trong mã nguồn mở.
-- Tích hợp material-ui và tailwindcss
-- Xây dựng webportal với chức năng cơ bản dự theo 1 bản mẫu
-
-## Links liên quan
+## Tech stack
 
 - [Typescript](https://www.typescriptlang.org/docs/handbook/react.html)
 - [Material UI](https://material-ui.com/)
@@ -20,15 +11,6 @@
 - [Redux](https://redux.js.org/)
 - [Redux saga](https://redux-saga.js.org/)
 
-## Một số hình ảnh tham khảo.
-
-[![193017568_1057608471439709_6071783960764198318_n](https://user-images.githubusercontent.com/42265865/121630189-e6c53d80-caa6-11eb-9d10-4604cf84572d.png)](#)
-
-[![image](https://user-images.githubusercontent.com/42265865/121630271-065c6600-caa7-11eb-9785-9e2d01bfb2d7.png)](#)
-
-[![image](https://user-images.githubusercontent.com/42265865/121630428-520f0f80-caa7-11eb-9b47-8653848547df.png) ](#)
-
-[![image](https://user-images.githubusercontent.com/42265865/121630455-6521df80-caa7-11eb-89e5-041d8b4cef67.png) ](#)
 
 ## Versioning
 
@@ -70,7 +52,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Quickly Start
 
-- Clone source from: `git@github.com:daongoc315/react-traning.git`
+- Clone source from: ``
 
 - Install dependencies: `cd react-traning && yarn`
 

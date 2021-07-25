@@ -1,6 +1,6 @@
 const Indicator = () => (
   <div className="indicator">
-    <span className="indicator__img new-class" />
+    <span className="indicator__img" />
   </div>
 )
 

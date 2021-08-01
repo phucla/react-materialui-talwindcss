@@ -5,7 +5,8 @@ export enum StatusCode {
   Forbidden = 403,
   TooManyRequests = 429,
   InternalServerError = 500,
-  Success = 200
+  Success = 200,
+  CreateSuccess = 201
 }
 
 const headers: Readonly<Record<string, string|boolean>> = {
@@ -67,4 +68,3 @@ class Api {
 }
 
 export const api = new Api()
-

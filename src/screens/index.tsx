@@ -12,13 +12,14 @@ import { selectToken } from 'screens/auth/authSlice'
 
 const LoginScreen = lazy(() => import('./auth/pages/Login'))
 const ProductScreen = lazy(() => import('./product/pages/Product'))
+const TodosScreen = lazy(() => import('./todos/pages/Todo'))
 
 const Screens = () => {
   const navigate = useNavigate()
   const auth_token = useSelector(selectToken)
   useEffect(() => {
     if (auth_token) {
-        navigate('/app/product')
+        navigate(ROUTES.TODOS)
     } else {
       navigate(ROUTES.LOGIN)
     }
@@ -35,6 +36,9 @@ const Screens = () => {
           </Route>
           <Route path="/app/product">
             <ProductScreen />
+          </Route>
+          <Route path={ROUTES.TODOS}>
+            <TodosScreen />
           </Route>
         </Routes>
       </DashboardLayout>

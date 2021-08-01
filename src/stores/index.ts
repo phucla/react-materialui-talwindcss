@@ -1,7 +1,7 @@
 // Libs
 import createSagaMiddleware from 'redux-saga'
 import { createStore, applyMiddleware, compose } from 'redux'
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { combineReducers } from '@reduxjs/toolkit';
 
 // Persist store
 import { persistStore, persistReducer } from 'redux-persist'
@@ -13,11 +13,13 @@ import rootSaga from './rootSaga'
 // Reducers
 import authReducer from 'screens/auth/authSlice'
 import productReducer from 'screens/product/productSlice';
+import todosReducer from 'screens/todos/todosSlice';
 import authMiddleware from 'middleware'
 
 const rootReducers = combineReducers({
   auth: authReducer,
-  product: productReducer
+  product: productReducer,
+  todos: todosReducer
 });
 
 const persistConfig = {
